@@ -1,0 +1,13 @@
+torch>=2.0.0
+torchaudio>=2.0.0
+pydub
+pyannote.audio
+wespeaker @ git+https://github.com/wenet-e2e/wespeaker.git
+kaldiio
+soundfile
+numpy
+scikit-learn
+matplotlib
+tqdm
+hdbscan
+pytorch-metric-learning
