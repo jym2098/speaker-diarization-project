@@ -1,7 +1,0 @@
-torch
-torchaudio
-pyannote.audio
-umap-learn
-matplotlib
-scikit-learn
-gradio
