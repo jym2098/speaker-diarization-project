@@ -13,8 +13,7 @@ import gradio as gr
 import tempfile
 
 
-def process_audio(audio_path, output_dir="segments", embeddings_dir="embeddings", scp_file="wav.scp", mapping_file="segment_mapping.json",
-                  window_size=1, step_size=0.5):
+def process_audio(audio_path, output_dir="segments", embeddings_dir="embeddings", scp_file="wav.scp", mapping_file="segment_mapping.json", window_size=1, step_size=0.5):
     # Run VAD to detect speech regions
     vad_pipeline = Pipeline.from_pretrained("pyannote/voice-activity-detection", use_auth_token=True)
     vad_output = vad_pipeline(audio_path)
@@ -90,7 +89,7 @@ def load_embeddings(ark_path):
     return embeddings, segment_names
 
 
-def spectral_cluster(embeddings, n_speakers=2):
+def spectral_cluster(embeddings, n_speakers):
     # Cluster embeddings based on cosine similarity
     similarity = cosine_similarity(embeddings)
     clusterer = SpectralClustering(
@@ -126,7 +125,7 @@ def merge_segments(segments, labels):
     return merged
 
 
-def run_clustering(ark_path, mapping_path, n_speakers=2):
+def run_clustering(ark_path, mapping_path, n_speakers):
     # Run full clustering pipeline
     segment_mapping = load_segment_mapping(mapping_path)
     embeddings, segment_names = load_embeddings(ark_path)
@@ -174,9 +173,9 @@ iface = gr.Interface(
     outputs=[
         gr.Textbox(label="Speaker Timeline", lines=20)
     ],
-    title="Speaker Diarization Web Demo",
+    title="Speaker Diarization Live Demo",
     description="Upload an audio file, specify the number of speakers, and get diarized speaker timestamps.",
-    allow_flagging="never"  # hides flag button
+    allow_flagging="never" 
 )
 
 if __name__ == "__main__":
