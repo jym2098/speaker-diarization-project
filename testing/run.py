@@ -6,7 +6,7 @@ from pyannote.core import Segment
 from pyannote.audio import Pipeline
 
 def process_audio(audio_path, output_dir="segments", scp_file="wav.scp", mapping_file="segment_mapping.json",
-                  window_size=1.5, step_size=0.75):
+                  window_size=1, step_size=0.5):
 
     # Step 1: Use PyAnnote VAD pipeline
     vad_pipeline = Pipeline.from_pretrained("pyannote/voice-activity-detection", use_auth_token=True)
@@ -59,4 +59,4 @@ def process_audio(audio_path, output_dir="segments", scp_file="wav.scp", mapping
 
 
 # Run the function
-process_audio("testing/audio/sample.wav")
+process_audio("testing/audio/test.wav")
